@@ -1,0 +1,23 @@
+.AppHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 1px solid black;
+  height: 140px;
+}
+
+.ListsContainer {
+  display: flex;
+  
+}
+
+.AppNav {
+  border: 1px solid black;
+  width: 35%;
+}
+
+.AppMain {
+  border: 1px solid black;
+  width: 65%;
+}
