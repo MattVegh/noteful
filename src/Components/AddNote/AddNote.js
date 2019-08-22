@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './AddNote.css'
+import { Link } from 'react-router-dom'
 
-export default function AddNote() {
+
+export default class AddNote extends Component {
+    render() {
     return (
         <section className='AddNote'>
-            <button>Back</button>
+            <Link to='/'>Back</Link>
             <h3>Create a note</h3>
             <p>Name</p>
             <input type='text'></input>
@@ -18,4 +21,5 @@ export default function AddNote() {
             </select>
         </section>
     )
+    }
 }

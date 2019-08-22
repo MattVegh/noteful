@@ -5,6 +5,10 @@
   margin: 0;
   border: 1px solid black;
   height: 140px;
+  text-decoration: none;
+  color: white;
+  background-color: maroon;
+  font-size: 35px;
 }
 
 .ListsContainer {
@@ -15,6 +19,8 @@
 .AppNav {
   border: 1px solid black;
   width: 35%;
+  
+  
 }
 
 .AppMain {

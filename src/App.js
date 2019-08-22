@@ -5,16 +5,18 @@ import NoteList from './Components/NoteList/NoteList'
 import AddFolder from './Components/AddFolder/AddFolder'
 import dummyStore from './dummy-store'
 import AddNote from './Components/AddNote/AddNote'
+import { Route, Link } from 'react-router-dom'
+import Note from './Components/NoteList/Note/Note'
+import Folder from './Components/FolderList/Folder/Folder'
+
 
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      folders: [],
-      notes: []
+  state = {
+      folders: dummyStore.folders,
+      notes: dummyStore.notes
   };
-  }
+  
     
   
 
@@ -27,18 +29,21 @@ class App extends Component {
   render() {
       return (
         <div className="App">
-            <h1 className='AppHeader'>Noteful</h1>
+            <Link to='/' className='AppHeader'>Noteful</Link>
           <div className='ListsContainer'>
             <nav className='AppNav'>
-              <FolderList folders={this.state.folders}/>
+              <Route exact path='/' render={() => (<FolderList folders={this.state.folders} /> )}/>
             </nav>
             <main className='AppMain'>
               {/* when on main page show NoteList and FolderList*/}
-              <NoteList notes={this.state.notes} /> 
-              {/* when add folder clicked, show AddFolder */}
-              <AddFolder />
+              <Route exact path='/' render={() => (<NoteList notes={this.state.notes} />  )}/>
+              
+              <Route path='/AddFolder' component={AddFolder} />
               {/* when add note clicked, show add note */}
-              <AddNote />
+              <Route path='/AddNote' component={AddNote} />
+              {/* <Route path='/note/:noteId' component={({ match }) => <Note notes={this.state.notes} match={match} />} /> */}
+              <Route path='/note/:noteId' component={(props) => <Note {...props} notes={this.state.notes} />} />
+              <Route path='/folder/:folderId' component={(props) => <Folder {...props} folders={this.state.folders} />} />
             </main>
           </div>
         </div>
