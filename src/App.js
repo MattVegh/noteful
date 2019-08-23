@@ -42,7 +42,7 @@ class App extends Component {
               <Route exact path='/' render={() => (<NoteList notes={this.state.notes} />  )}/>
               <Route path='/AddFolder' component={AddFolder} />
               <Route path='/AddNote' component={AddNote} />
-              <Route path='/folder/:folderId' render={({ match }) => (<NoteList match={match} notes={this.state.notes} folders={this.state.folders} /> )}/>
+              <Route path='/folder/:folderId' render={(props) => (<NoteList {...props} notes={this.state.notes} folders={this.state.folders} /> )}/>
               {/* <Route path='/folder/:folderId' component={(props) => <Folder {...props} folders={this.state.folders} />} /> */}
               <Route 
                 path='/folder/:folderId/:noteId' 
