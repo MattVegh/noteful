@@ -1,6 +1,6 @@
 import React from 'react'
 import './Folder.css'
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 export default function Folder(props) {
@@ -8,11 +8,10 @@ export default function Folder(props) {
     console.log(folder)
     return (
         <div className='Folder'>
-            <Link to='/'>Back</Link>
             <li className='IndvFolder' key={folder.id}>
-                    <Link to={`/folder/${folder.id}`}  className='FolderHeader'>{folder.name}</Link>
+                    <p className='FolderContent'>placeholder</p>
             </li>
-            <p className='FolderContent'>placeholder</p>
+            
             
         </div>
     )

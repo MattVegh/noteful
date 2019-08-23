@@ -8,6 +8,7 @@ import AddNote from './Components/AddNote/AddNote'
 import { Route, Link } from 'react-router-dom'
 import Note from './Components/NoteList/Note/Note'
 import Folder from './Components/FolderList/Folder/Folder'
+import SideNote from './Components/SideNote/SideNote'
 
 
 
@@ -33,17 +34,21 @@ class App extends Component {
           <div className='ListsContainer'>
             <nav className='AppNav'>
               <Route exact path='/' render={() => (<FolderList folders={this.state.folders} /> )}/>
+              <Route path='/folder/:folderId' render={() => (<FolderList folders={this.state.folders} /> )}/>
+              <Route path='/folder/:folderId/:noteId'  render={() => (<SideNote notes={this.state.notes} folders={this.state.folders} /> )} />
+              <Route path='/folder/:folderId/:noteId' component={({ match }) => <Note match={match} notes={this.state.notes} folders={this.state.folders} />} />
             </nav>
             <main className='AppMain'>
-              {/* when on main page show NoteList and FolderList*/}
               <Route exact path='/' render={() => (<NoteList notes={this.state.notes} />  )}/>
-              
               <Route path='/AddFolder' component={AddFolder} />
-              {/* when add note clicked, show add note */}
               <Route path='/AddNote' component={AddNote} />
-              {/* <Route path='/note/:noteId' component={({ match }) => <Note notes={this.state.notes} match={match} />} /> */}
-              <Route path='/note/:noteId' component={(props) => <Note {...props} notes={this.state.notes} />} />
               <Route path='/folder/:folderId' component={(props) => <Folder {...props} folders={this.state.folders} />} />
+              <Route 
+                path='/folder/:folderId/:noteId' 
+                component={(props) => <Note {...props} notes={this.state.notes} folders={this.state.folders}/>}
+               />
+              {/* <Route path='/folder/:folderId/:noteId' component={(props) => <Note {...props} notes={this.state.notes} />} />
+              <Route path='/folder/:folderId/:noteId' component={({ match }) => <Note match={match} folders={this.state.folders} />} /> */}
             </main>
           </div>
         </div>
