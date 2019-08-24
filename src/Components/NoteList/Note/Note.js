@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom'
 
 
 export default function Note(props) {
-    const note = props.notes.find(note => note.id === props.match.params.noteId)
-    const folder = props.folders.find(folder => folder.id === props.match.params.folderId)
+    const note = props.notes.filter(note => note.noteId === props.match.params.noteId);
+    const folder = props.folders.filter(folder => folder.id === props.match.params.folderId)
     console.log(note)
     return (
         <div className='Note'>
-            <Link to='/'>Back</Link>
             <li className='IndvNote' key={note.id}>
                     <Link to={`folder/${folder.id}/${note.id}`}  className='NoteHeader'>{note.name}</Link>
                     <p className='NoteDate'>{note.modified}</p>
