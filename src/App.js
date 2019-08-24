@@ -23,8 +23,6 @@ class App extends Component {
 
   componentDidMount() {
     this.setState(dummyStore);
-    console.log(this.state.folders)
-    console.log(this.state.notes)
   }
 
   render() {

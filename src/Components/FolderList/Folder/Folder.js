@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function Folder(props) {
     const folder = props.folders.find(folder => folder.id === props.match.params.folderId)
-    console.log(folder)
+    
     return (
         <div className='Folder'>
             <li className='IndvFolder' key={folder.id}>
