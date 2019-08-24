@@ -39,16 +39,15 @@ class App extends Component {
               {/* <Route path='/folder/:folderId/:noteId' component={({ match }) => <Note match={match} notes={this.state.notes} folders={this.state.folders} />} /> */}
             </nav>
             <main className='AppMain'>
-              <Route exact path='/' render={(props) => (<NoteList {...props} notes={this.state.notes} />  )}/>
+              <Route exact path='/' render={(props) => (<NoteList {...props} notes={this.state.notes} folders={this.state.folders} />  )}/>
               <Route path='/folder/:folderId' render={(props) => (<NoteList {...props} notes={this.state.notes} folders={this.state.folders} /> )}/>
               <Route path='/AddFolder' component={AddFolder} />
               <Route path='/AddNote' component={AddNote} />
-              
-              {/* <Route path='/folder/:folderId' component={(props) => <Folder {...props} folders={this.state.folders} />} /> */}
               <Route 
                 path='/folder/:folderId/:noteId' 
                 render={(props) => <Note {...props} notes={this.state.notes} folders={this.state.folders}/>}
                />
+              {/* <Route path='/folder/:folderId' component={(props) => <Folder {...props} folders={this.state.folders} />} /> */}
               {/* <Route path='/folder/:folderId/:noteId' component={(props) => <Note {...props} notes={this.state.notes} />} />
               <Route path='/folder/:folderId/:noteId' component={({ match }) => <Note match={match} folders={this.state.folders} />} /> */}
             </main>
