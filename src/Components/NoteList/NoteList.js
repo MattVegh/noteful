@@ -10,12 +10,19 @@ export default function NoteList(props) {
     return (
         <section className='NoteList'>
             <ul>
-            {note.map(note =>
+            {folder ? note.map(note =>
                  <li key={note.id}>
                     <Link to={`/folder/${folder.id}/${note.id}`}  className='NoteHeader'>{note.name}</Link>
                     <p className='NoteDate'>{note.modified}</p>
                     <button className='DeleteNoteButton'>Delete Note</button>
-                </li>)}
+                </li>) :
+                props.notes.map(note =>
+                <li key={note.id}>
+                    <Link to={`/folder/${props.match.params.folderId}/${note.id}`}  className='NoteHeader'>{note.name}</Link>
+                    <p className='NoteDate'>{note.modified}</p>
+                        <button className='DeleteNoteButton'>Delete Note</button>
+                </li>)
+              }
             </ul>
             <Link to='/AddNote'>Add Note</Link>
         </section>
