@@ -38,7 +38,7 @@ class App extends Component {
             </nav>
             <main className='AppMain'>
               <Route exact path='/' render={(props) => (<NoteList {...props} notes={this.state.notes} folders={this.state.folders} />  )}/>
-              <Route path='/folder/:folderId' render={(props) => (<NoteList {...props} notes={this.state.notes} folders={this.state.folders} /> )}/>
+              <Route exact path='/folder/:folderId' render={(props) => (<NoteList {...props} notes={this.state.notes} folders={this.state.folders} /> )}/>
               <Route 
                 path='/folder/:folderId/:noteId' 
                 render={(props) => (<Note {...props} notes={this.state.notes} folders={this.state.folders}/>)}

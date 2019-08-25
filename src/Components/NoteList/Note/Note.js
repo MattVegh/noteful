@@ -12,6 +12,7 @@ export default function Note(props) {
     const noteArray = props.notes.filter(note => note.id === props.match.params.noteId);
     const note = noteArray[0]
     const folder = props.folders.filter(folder => folder.id === props.match.params.folderId)
+    console.log(note)
     
     
     return (
