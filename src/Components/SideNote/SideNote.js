@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function SideNote(props) {
-    console.log(props)
+    const folder = props.folders.filter(folder => folder.id === props.match.params.folderId);
     return (
         <div className='SideNote'>
             <Link to='/'>Back</Link>
-            <h1>{props.folders.name}</h1>
+            <h1>{folder.name}</h1>
         </div>
     )
 }
