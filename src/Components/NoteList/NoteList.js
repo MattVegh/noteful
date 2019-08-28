@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './NoteList.css'
 import { Link } from 'react-router-dom'
 import NoteContext from '../../NoteContext';
 
-export default function NoteList() {
-    //  const note = props.notes.filter(note => note.folderId === props.match.params.folderId);
-    //  const folderArray = props.folders.filter(folder => folder.id === props.match.params.folderId);
-    //  const folder = folderArray[0];
-     
+export default class NoteList extends Component {
+    static contextType = NoteContext;
+    
+    render() {
+        console.log(NoteContext)
     return (
         
         <NoteContext.Consumer>
@@ -16,9 +16,9 @@ export default function NoteList() {
                 const note = value.notes.filter(note => note.folderId === value.folderId);
                 const folderArray = value.folders.filter(folder => folder.id === value.folderId);
                 const folder = folderArray[0];
-                console.log(note)
-                console.log(folderArray)
-                console.log(folder)
+                // console.log(note)
+                // console.log(folderArray)
+                // console.log(folder)
                 return (
                     <section className='NoteList'>
                         <ul>
@@ -44,6 +44,7 @@ export default function NoteList() {
         
     )
 }
+}
 
 
 
@@ -51,6 +52,7 @@ export default function NoteList() {
 //     const note = props.notes.filter(note => note.folderId === props.match.params.folderId);
 //     const folderArray = props.folders.filter(folder => folder.id === props.match.params.folderId);
 //     const folder = folderArray[0];
+
     
 //    return (
 //        <section className='NoteList'>
