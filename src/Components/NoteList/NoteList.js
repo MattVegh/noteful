@@ -16,9 +16,9 @@ export default class NoteList extends Component {
                 const note = value.notes.filter(note => note.folderId === value.folderId);
                 const folderArray = value.folders.filter(folder => folder.id === value.folderId);
                 const folder = folderArray[0];
-                // console.log(note)
-                // console.log(folderArray)
-                // console.log(folder)
+                console.log(note)
+                console.log(folderArray)
+                console.log(folder)
                 return (
                     <section className='NoteList'>
                         <ul>
