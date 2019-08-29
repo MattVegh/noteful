@@ -3,7 +3,7 @@ import './App.css';
 import FolderList from './Components/FolderList/FolderList'
 import NoteList from './Components/NoteList/NoteList'
 import AddFolder from './Components/AddFolder/AddFolder'
-import dummyStore from './dummy-store'
+
 import AddNote from './Components/AddNote/AddNote'
 import { Route, Link } from 'react-router-dom'
 import Note from './Components/NoteList/Note/Note'
@@ -14,15 +14,36 @@ import NoteContext from './NoteContext'
 
 class App extends Component {
   state = {
-      folders: dummyStore.folders,
-      notes: dummyStore.notes
+      folders: [],
+      notes: []
   };
   
     
   
 
   componentDidMount() {
-    this.setState(dummyStore);
+    Promise.all([
+      fetch(`http://localhost:9090/notes`),
+      fetch(`http://localhost:9090/folders`)
+  ])
+      .then(([notesRes, foldersRes]) => {
+          if (!notesRes.ok)
+              return notesRes.json().then(e => Promise.reject(e));
+          if (!foldersRes.ok)
+              return foldersRes.json().then(e => Promise.reject(e));
+
+          return Promise.all([notesRes.json(), foldersRes.json()]);
+      })
+      .then(([notes, folders]) => {
+          this.setState({notes, folders});
+      })
+      .catch(error => {
+          console.error({error});
+      });
+  }
+
+  handleDeleteNote() {
+    console.log('plz work')
   }
 
   render() {
@@ -30,9 +51,13 @@ class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes
     }
+    console.log(contextValue)
     
       return (
-        <NoteContext.Provider value={contextValue}>
+        <NoteContext.Provider 
+          value={contextValue}
+          handleDeleteNote={this.handleDeleteNote}
+          >
         <div className="App">
             <Link to='/' className='AppHeader'>Noteful</Link>
           <div className='ListsContainer'>

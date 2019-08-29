@@ -7,46 +7,34 @@ export default class NoteList extends Component {
     static contextType = NoteContext;
     
     render() {
-        console.log(NoteContext)
-    return (
+       
         
-        <NoteContext.Consumer>
-            
-            {(value) => {
-                const note = this.context.notes;
-                // const note = value.notes.filter(note => note.folderId === value.folderId);
-                const folderArray = this.context.folders;
-                // const folderArray = value.folders.filter(folder => folder.id === value.folderId);
-                const folder = folderArray[0];
-                console.log(note)
-                console.log(folderArray)
-                // console.log(folder)
-
-                return (
-                    <section className='NoteList'>
-                        <ul>
-                        {folder ? note.map(note =>
-                            <li key={note.id}>
-                                <Link to={`/folder/${folder.id}/${note.id}`}  className='NoteHeader'>{note.name}</Link>
-                                <p className='NoteDate'>{note.modified}</p>
-                                <button className='DeleteNoteButton'>Delete Note</button>
+                const notes = this.context.notes.filter(note => note.folderId === this.props.match.params.folderId);
+                const folderArray = this.context.folders.filter(folder => folder.id === this.props.match.params.folderId);
+                const folder = folderArray[0]
+    return (
+           <div>
+                <section className='NoteList'>
+                    <ul>
+                        {folder ? notes.map(notes =>
+                            <li key={notes.id}>
+                                <Link to={`/folder/${folder.id}/${notes.id}`}  className='NoteHeader'>{notes.name}</Link>
+                                <p className='NoteDate'>{notes.modified}</p>
+                                <button className='DeleteNoteButton' onClick={this.handleDeleteNote}>Delete Note</button>
                             </li>) :
-                            value.notes.map(note =>
-                            <li key={note.id}>
-                                <Link to={`/folder/${value.folderId}/${note.id}`}  className='NoteHeader'>{note.name}</Link>
-                                <p className='NoteDate'>{note.modified}</p>
-                                    <button className='DeleteNoteButton'>Delete Note</button>
+                           this.context.notes.map(notes =>
+                            <li key={notes.id}>
+                                <Link to={`/folder/${notes.folderId}/${notes.id}`}  className='NoteHeader'>{notes.name}</Link>
+                                <p className='NoteDate'>{notes.modified}</p>
+                                    <button className='DeleteNoteButton' onClick={this.handleDeleteNote}>Delete Note</button>
                             </li>)
                         }
                         </ul>
                         <Link to='/AddNote'>Add Note</Link>
-                    </section>
-                )
-            }}
-        </NoteContext.Consumer>
-        
+                </section>    
+            </div>
     )
-}
+    }
 }
 
 
