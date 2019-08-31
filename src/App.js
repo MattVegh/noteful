@@ -46,12 +46,34 @@ class App extends Component {
     console.log('plz work')
   }
 
+
+  addFolder = (folderName) => {
+    console.log('folder name is', folderName)
+    this.setState({folders: {name: folderName}})
+    console.log(this.state.folders)
+
+}
+  addNoteName = (noteName) => {
+    console.log('note name is ', noteName)
+  }
+
+  addNoteContent = (noteContent) => {
+    console.log('note content is', noteContent)
+  }
+
+
+  updateFolderName(folderName) {
+    console.log(folderName);
+    this.setState({folders: {name: folderName}})
+    console.log(this.state.folders)
+}
+
   render() {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes
     }
-    console.log(contextValue)
+    
     
       return (
         <NoteContext.Provider 
@@ -64,14 +86,14 @@ class App extends Component {
             <nav className='AppNav'>
               <Route exact path='/' component={FolderList}/>
               <Route path='/folder/:folderId' component={FolderList}/>
-              {/* <Route path='/folder/:folderId/:noteId' component={SideNote} /> */}
+              <Route path='/folder/:folderId/:noteId' component={SideNote} />
             </nav>
             <main className='AppMain'>
               <Route exact path='/' component={NoteList} />
               <Route exact path='/folder/:folderId' component={NoteList} />
               <Route path='/folder/:folderId/:noteId' component={Note} />
-              {/* <Route path='/AddFolder' component={AddFolder} />
-              <Route path='/AddNote' component={AddNote} /> */}
+              <Route path='/AddFolder' component={() => {return <AddFolder addFolder={this.addFolder}/>}} />
+              <Route path='/AddNote' component={() => {return <AddNote addNoteName={this.addNoteName} addNoteContent={this.addNoteContent}/>}} />
             </main>
           </div>
         </div>
