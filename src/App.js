@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   handleDeleteNote() {
-    console.log('plz work')
+    
   }
 
 
