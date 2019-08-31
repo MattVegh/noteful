@@ -3,6 +3,7 @@ import './NoteList.css'
 import { Link } from 'react-router-dom'
 import NoteContext from '../../NoteContext';
 
+
 export default class NoteList extends Component {
     static contextType = NoteContext;
     

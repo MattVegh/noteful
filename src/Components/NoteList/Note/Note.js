@@ -8,7 +8,6 @@ export default class Note extends Component {
     static contextType = NoteContext;
     
     
-    
     render() {
         const noteArray = this.context.notes.filter(note => note.id === this.props.match.params.noteId);
         const note = noteArray[0]

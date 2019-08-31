@@ -6,6 +6,7 @@ import NoteContext from '../../NoteContext';
 
 export default class AddNote extends Component {
     
+    
     handleSubmit(event) {
         event.preventDefault();
         this.props.addNoteName(event.target['noteName'].value)

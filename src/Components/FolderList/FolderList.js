@@ -5,6 +5,7 @@ import NoteContext from '../../NoteContext';
 
 export default function FolderList() {
     
+    
     return (
         <NoteContext.Consumer>
             {(value) => {

@@ -14,4 +14,5 @@ export default function SideNote(props) {
             </NoteContext.Consumer>
         </div>
     )
+    
 }

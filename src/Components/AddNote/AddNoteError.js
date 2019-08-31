@@ -10,6 +10,7 @@ export default class AddNoteError extends Component {
     static getDerivedStateFromError() {
         return { hasError: true };
     }
+    
     render() {
         if (this.state.hasError) {      
             return (

@@ -20,5 +20,6 @@ export default class AddFolder extends Component {
             <button>Add Folder</button>
         </form>
     )
+    
     }
 }
