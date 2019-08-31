@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   handleDeleteNote() {
-    
+    console.log('plz work')
   }
 
 
@@ -67,22 +67,20 @@ class App extends Component {
   render() {
     const contextValue = {
       folders: this.state.folders,
-      notes: this.state.notes
+      notes: this.state.notes,
+      handleDeleteNote: this.handleDeleteNote
     }
     
-    
+    console.log(contextValue)
       return (
-        <NoteContext.Provider 
-          value={contextValue}
-          handleDeleteNote={this.handleDeleteNote}
-          >
+        <NoteContext.Provider value={contextValue} >
         <div className="App">
             <Link to='/' className='AppHeader'>Noteful</Link>
           <div className='ListsContainer'>
             <nav className='AppNav'>
               <Route exact path='/' component={FolderList}/>
-              <Route path='/folder/:folderId' component={FolderList}/>
-              <Route path='/folder/:folderId/:noteId' component={SideNote} />
+              <Route exact path='/folder/:folderId' component={FolderList}/>
+              <Route exact path='/folder/:folderId/:noteId' component={SideNote} />
             </nav>
             <main className='AppMain'>
               <Route exact path='/' component={NoteList} />

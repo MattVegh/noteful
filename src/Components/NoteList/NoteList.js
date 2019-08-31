@@ -6,6 +6,7 @@ import NoteContext from '../../NoteContext';
 
 export default class NoteList extends Component {
     static contextType = NoteContext;
+
     
     render() {
        

@@ -1,9 +1,14 @@
 import React from 'react'
 import './Folder.css'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
+
 
 
 export default function Folder(props) {
+    Folder.PropTypes = {
+        folders: PropTypes.string
+    }
+    
     const folder = props.folders.find(folder => folder.id === props.match.params.folderId)
     
     return (
@@ -14,6 +19,6 @@ export default function Folder(props) {
             
             
         </div>
-        
+
     )
 }
