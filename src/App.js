@@ -3,7 +3,7 @@ import './App.css';
 import FolderList from './Components/FolderList/FolderList'
 import NoteList from './Components/NoteList/NoteList'
 import AddFolder from './Components/AddFolder/AddFolder'
-
+import AddNoteError from './Components/AddNote/AddNoteError'
 import AddNote from './Components/AddNote/AddNote'
 import { Route, Link } from 'react-router-dom'
 import Note from './Components/NoteList/Note/Note'
@@ -49,24 +49,21 @@ class App extends Component {
 
   addFolder = (folderName) => {
     console.log('folder name is', folderName)
-    this.setState({folders: {name: folderName}})
+    this.setState({folders: [...this.state.folders, {name: folderName}]})
     console.log(this.state.folders)
 
 }
   addNoteName = (noteName) => {
     console.log('note name is ', noteName)
+    this.setState({notes: [...this.state.notes, {name: noteName}]})
   }
 
   addNoteContent = (noteContent) => {
     console.log('note content is', noteContent)
+    this.setState({notes: [...this.state.notes, {content: noteContent}]})
   }
 
 
-  updateFolderName(folderName) {
-    console.log(folderName);
-    this.setState({folders: {name: folderName}})
-    console.log(this.state.folders)
-}
 
   render() {
     const contextValue = {
@@ -93,11 +90,16 @@ class App extends Component {
               <Route exact path='/folder/:folderId' component={NoteList} />
               <Route path='/folder/:folderId/:noteId' component={Note} />
               <Route path='/AddFolder' component={() => {return <AddFolder addFolder={this.addFolder}/>}} />
-              <Route path='/AddNote' component={() => {return <AddNote addNoteName={this.addNoteName} addNoteContent={this.addNoteContent}/>}} />
+              <AddNoteError>
+                <Route path='/AddNote' component={() => {return <AddNote addNoteName={this.addNoteName} addNoteContent={this.addNoteContent}/>}} />
+              </AddNoteError>
+              
             </main>
           </div>
         </div>
         </NoteContext.Provider>
+
+
     //     <div className="App">
     //     <Link to='/' className='AppHeader'>Noteful</Link>
     //   <div className='ListsContainer'>
@@ -118,6 +120,8 @@ class App extends Component {
     //     </main>
     //   </div>
     // </div>
+
+    
       );
     
   }
