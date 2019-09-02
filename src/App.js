@@ -42,13 +42,11 @@ class App extends Component {
       });
   }
 
-  handleDeleteNote() {
-    const notes = this.state.notes;
-    fetch(`http://localhost:9090/notes${notes.id}`, {
-      method: 'DELETE',
-    })
-    .then(console.log(this.state.notes))
-  }
+  
+
+//   handleDeleteNote = () => {
+
+// }
 
 
   addFolder = (folderName) => {

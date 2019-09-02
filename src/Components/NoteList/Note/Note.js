@@ -7,7 +7,19 @@ import NoteContext from '../../../NoteContext';
 export default class Note extends Component {
     static contextType = NoteContext;
     
-    
+    // handleDeleteNote(event) {
+    //     const notes = event.target;
+    //     fetch(`http://localhost:9090/notes${notes.id}`, {
+    //       method: 'DELETE',
+    //       headers: {
+    //         'content-type': 'application/json'
+    //       },
+    //     })
+    //     .then(response =>
+    //       response.json().then(json => {
+    //         return json;
+    //       }))
+    //   }
     render() {
         const noteArray = this.context.notes.filter(note => note.id === this.props.match.params.noteId);
         const note = noteArray[0]

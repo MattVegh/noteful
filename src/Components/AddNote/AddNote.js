@@ -33,7 +33,8 @@ export default class AddNote extends Component {
                 modified: new Date().toISOString(),
                 folderId: folderId
               })
-        })
+              
+        }).then(console.log(this.state.selectedFolderId, 'is the state'))
         
     }
 
