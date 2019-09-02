@@ -16,7 +16,7 @@ export default class AddFolder extends Component {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                name: name,
+                name: name
               })
         })
     }

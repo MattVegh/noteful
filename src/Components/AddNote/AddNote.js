@@ -5,7 +5,7 @@ import NoteContext from '../../NoteContext';
 
 
 export default class AddNote extends Component {
-    
+    static contextType = NoteContext;
     
     handleSubmit = (event) => {
         event.preventDefault();
@@ -13,7 +13,7 @@ export default class AddNote extends Component {
         this.props.addNoteContent(event.target['noteContent'].value)
         const name = (event.target['noteName'].value)
         const content = (event.target['noteContent'].value)
-        const folderId = (event.target['folderTarget'].value)
+        //const folderId = (event.target['folderTarget'].value)
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
             headers: {
@@ -24,7 +24,7 @@ export default class AddNote extends Component {
                 name: name,
                 content: content,
                 modified: new Date().toISOString(),
-                folderId: folderId
+                //folderId: folderId
               })
         })
         
@@ -41,15 +41,10 @@ export default class AddNote extends Component {
             <label htmlFor='contentName'>Content</label>
             <input type='text' name='noteContent' id='noteContent' ></input>
             <p>Folder</p>
-            <NoteContext.Consumer>
-            {(value) => {
-            return (
-                    <select>
-                        {value.folders.map(folders => <option name='folderTarget' key={folders.id}>{folders.name}</option>)}
-                    </select>
-            )
-            }}
-            </NoteContext.Consumer>
+            <select>
+                {this.context.folders.map(folders => <option name='folderTarget' key={folders.id}>{folders.name}</option>)}
+            </select>
+           
             <button>Add Note</button>
         </form>
     )
