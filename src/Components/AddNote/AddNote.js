@@ -5,6 +5,12 @@ import NoteContext from '../../NoteContext';
 
 
 export default class AddNote extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectedFolder: ''
+        }
+    }
     static contextType = NoteContext;
     
     handleSubmit = (event) => {
@@ -13,7 +19,7 @@ export default class AddNote extends Component {
         this.props.addNoteContent(event.target['noteContent'].value)
         const name = (event.target['noteName'].value)
         const content = (event.target['noteContent'].value)
-        //const folderId = (event.target['folderTarget'].value)
+        const folderId = this.state.selectedFolder.id
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
             headers: {
@@ -24,10 +30,16 @@ export default class AddNote extends Component {
                 name: name,
                 content: content,
                 modified: new Date().toISOString(),
-                //folderId: folderId
+                folderId: folderId
               })
         })
         
+    }
+
+    selectFolder = (event) => {
+        const { name, value } = event.target
+        this.setState({  selectedFolder: value})
+        console.log(name, value)
     }
 
     render() {
@@ -41,7 +53,7 @@ export default class AddNote extends Component {
             <label htmlFor='contentName'>Content</label>
             <input type='text' name='noteContent' id='noteContent' ></input>
             <p>Folder</p>
-            <select>
+            <select value={this.state.selectedFolder} name='folder' onChange={this.selectFolder}>
                 {this.context.folders.map(folders => <option name='folderTarget' key={folders.id}>{folders.name}</option>)}
             </select>
            
