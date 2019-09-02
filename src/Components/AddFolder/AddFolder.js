@@ -8,6 +8,17 @@ export default class AddFolder extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.addFolder(event.target['folderName'].value)
+        const name = (event.target['folderName'].value)
+        fetch(`http://localhost:9090/folders`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: name,
+              })
+        })
     }
     
     render() {
@@ -20,6 +31,6 @@ export default class AddFolder extends Component {
             <button>Add Folder</button>
         </form>
     )
-    
+
     }
 }

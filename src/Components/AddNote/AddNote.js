@@ -7,10 +7,23 @@ import NoteContext from '../../NoteContext';
 export default class AddNote extends Component {
     
     
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         this.props.addNoteName(event.target['noteName'].value)
         this.props.addNoteContent(event.target['noteContent'].value)
+        const name = (event.target['noteName'].value)
+        const content = (event.target['noteContent'].value)
+        fetch(`http://localhost:9090/notes`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: name,
+                content: content,
+              })
+        })
     }
 
     render() {

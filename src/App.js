@@ -43,23 +43,24 @@ class App extends Component {
   }
 
   handleDeleteNote() {
-    console.log('plz work')
+    const notes = this.state.notes;
+    fetch(`http://localhost:9090/notes${notes.id}`, {
+      method: 'DELETE',
+    })
+    .then(console.log(this.state.notes))
   }
 
 
   addFolder = (folderName) => {
-    console.log('folder name is', folderName)
     this.setState({folders: [...this.state.folders, {name: folderName}]})
     console.log(this.state.folders)
 
 }
   addNoteName = (noteName) => {
-    console.log('note name is ', noteName)
     this.setState({notes: [...this.state.notes, {name: noteName}]})
   }
 
   addNoteContent = (noteContent) => {
-    console.log('note content is', noteContent)
     this.setState({notes: [...this.state.notes, {content: noteContent}]})
   }
 
