@@ -13,6 +13,7 @@ export default class AddNote extends Component {
         this.props.addNoteContent(event.target['noteContent'].value)
         const name = (event.target['noteName'].value)
         const content = (event.target['noteContent'].value)
+        const folderId = (event.target['folderTarget'].value)
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
             headers: {
@@ -22,8 +23,11 @@ export default class AddNote extends Component {
               body: JSON.stringify({
                 name: name,
                 content: content,
+                modified: new Date().toISOString(),
+                folderId: folderId
               })
         })
+        
     }
 
     render() {
@@ -41,7 +45,7 @@ export default class AddNote extends Component {
             {(value) => {
             return (
                     <select>
-                        {value.folders.map(folders => <option key={folders.id}>{folders.name}</option>)}
+                        {value.folders.map(folders => <option name='folderTarget' key={folders.id}>{folders.name}</option>)}
                     </select>
             )
             }}
