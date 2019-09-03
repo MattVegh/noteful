@@ -7,6 +7,18 @@ import NoteContext from '../../NoteContext';
 export default class NoteList extends Component {
     static contextType = NoteContext;
 
+    handleDeleteNote = (event) => {
+        console.log(event.target)
+        const notes = event.target;
+        fetch(`http://localhost:9090/notes${notes.id}`, {
+          method: 'DELETE',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+        .then(response => response.json())
+        .then(response => this.props.deleteNote(response))
+      }
     
     render() {
        
@@ -28,7 +40,7 @@ export default class NoteList extends Component {
                             <li key={notes.id}>
                                 <Link to={`/folder/${notes.folderId}/${notes.id}`}  className='NoteHeader'>{notes.name}</Link>
                                 <p className='NoteDate'>{notes.modified}</p>
-                                    <button className='DeleteNoteButton' onClick={this.context.handleDeleteNote}>Delete Note</button>
+                                    <button className='DeleteNoteButton' onClick={this.handleDeleteNote}>Delete Note</button>
                             </li>)
                         }
                         </ul>

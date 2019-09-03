@@ -15,8 +15,6 @@ export default class AddNote extends Component {
     
     handleSubmit = (event) => {
         event.preventDefault();
-        // this.props.addNoteName(event.target['noteName'].value)
-        // this.props.addNoteContent(event.target['noteContent'].value)
         const name = (event.target['noteName'].value)
         const content = (event.target['noteContent'].value)
         const folderId = this.state.selectedFolderId
@@ -35,11 +33,7 @@ export default class AddNote extends Component {
               }) 
         })
         .then(response => response.json())
-        .then(response => console.log(response))
         .then(response => this.props.addNewNote(response))
-        
-        
-        
     }
 
     selectFolder = (event) => {

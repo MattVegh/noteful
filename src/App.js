@@ -44,24 +44,13 @@ class App extends Component {
 
   
 
-  // handleDeleteNote = (event) => {
-  //   console.log(event.currentTarget)
-  //   const notes = event.target;
-  //   fetch(`http://localhost:9090/notes${notes.id}`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //   })
-  //   .then(response =>
-  //     response.json().then(json => {
-  //       return json;
-  //     }))
-  // }
+  deleteNote = (deletedNote) => {
+    console.log(deletedNote)
+  }
 
 
-  addFolder = (folderName) => {
-    this.setState({folders: [...this.state.folders, {name: folderName}]})
+  addNewFolder = (newFolder) => {
+    this.setState({folders: [...this.state.folders, newFolder]})
     console.log(this.state.folders)
 
 }
@@ -69,16 +58,13 @@ class App extends Component {
     this.setState({notes: [...this.state.notes, newNote]})
   }
 
-  // addNoteContent = (noteContent) => {
-  //   this.setState({notes: [...this.state.notes, {content: noteContent}]})
-  // }
-
+  
 
   render() {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-      handleDeleteNote: this.handleDeleteNote
+      deleteNote: this.deleteNote
     }
     
     console.log(contextValue)
@@ -96,9 +82,9 @@ class App extends Component {
               <Route exact path='/' component={NoteList} />
               <Route exact path='/folder/:folderId' component={NoteList} />
               <Route path='/folder/:folderId/:noteId' component={Note} />
-              <Route path='/AddFolder' component={() => {return <AddFolder addFolder={this.addFolder}/>}} />
+              <Route path='/AddFolder' component={() => {return <AddFolder addNewFolder={this.addNewFolder}/>}} />
               <AddNoteError>
-                <Route path='/AddNote' component={() => {return <AddNote addNoteName={this.addNoteName} addNoteContent={this.addNoteContent}/>}} />
+                <Route path='/AddNote' component={() => {return <AddNote addNewNote={this.addNewNote}/>}} />
               </AddNoteError>
               
             </main>
