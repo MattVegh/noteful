@@ -7,19 +7,20 @@ import NoteContext from '../../NoteContext';
 export default class NoteList extends Component {
     static contextType = NoteContext;
     
-    handleDeleteNote = (event) => {
+    handleDeleteNote = (event, noteId) => {
         event.preventDefault();
-        const noteId = event.target
+        
         console.log(noteId)
         
-        // fetch(`http://localhost:9090/notes${notes.id}`, {
-        //   method: 'DELETE',
-        //   headers: {
-        //     'content-type': 'application/json'
-        //   },
-        // })
-        // .then(response => response.json())
-        // .then(response => this.props.deleteNote(response))
+        
+        fetch(`http://localhost:9090/notes${noteId}`, {
+          method: 'DELETE',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+        .then(response => response.json())
+        .then(response => this.context.deleteNote(response))
       }
     
     render() {
@@ -42,7 +43,7 @@ export default class NoteList extends Component {
                                 <p className='NoteDate'>{notes.modified}</p>
                                 <button 
                                     className='DeleteNoteButton' 
-                                    onClick={this.handleDeleteNote}>
+                                    onClick={e => this.handleDeleteNote(e, notes.id)}>
                                         Delete Note
                                 </button>
                             </li>) 
@@ -55,8 +56,8 @@ export default class NoteList extends Component {
                                 </Link>
                                 <p className='NoteDate'>{notes.modified}</p>
                                     <button 
-                                        className='DeleteNoteButton' 
-                                        onClick={this.handleDeleteNote}>
+                                        className='DeleteNoteButton'
+                                        onClick={e => this.handleDeleteNote(e, notes.id)}>
                                             Delete Note
                                     </button>
                             </li>)
