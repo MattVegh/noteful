@@ -19,6 +19,7 @@ export default class Note extends Component {
         })
         .then(response => response.json())
         .then(response => this.context.deleteNote(noteId))
+        .then(this.props.history.push(`/`))
       }
 
 
