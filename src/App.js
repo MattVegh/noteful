@@ -44,9 +44,20 @@ class App extends Component {
 
   
 
-//   handleDeleteNote = () => {
-
-// }
+  // handleDeleteNote = (event) => {
+  //   console.log(event.currentTarget)
+  //   const notes = event.target;
+  //   fetch(`http://localhost:9090/notes${notes.id}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'content-type': 'application/json'
+  //     },
+  //   })
+  //   .then(response =>
+  //     response.json().then(json => {
+  //       return json;
+  //     }))
+  // }
 
 
   addFolder = (folderName) => {
@@ -54,13 +65,13 @@ class App extends Component {
     console.log(this.state.folders)
 
 }
-  addNoteName = (noteName) => {
-    this.setState({notes: [...this.state.notes, {name: noteName}]})
+  addNewNote = (newNote) => {
+    this.setState({notes: [...this.state.notes, newNote]})
   }
 
-  addNoteContent = (noteContent) => {
-    this.setState({notes: [...this.state.notes, {content: noteContent}]})
-  }
+  // addNoteContent = (noteContent) => {
+  //   this.setState({notes: [...this.state.notes, {content: noteContent}]})
+  // }
 
 
   render() {

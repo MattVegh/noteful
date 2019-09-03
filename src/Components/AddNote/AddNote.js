@@ -15,8 +15,8 @@ export default class AddNote extends Component {
     
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.addNoteName(event.target['noteName'].value)
-        this.props.addNoteContent(event.target['noteContent'].value)
+        // this.props.addNoteName(event.target['noteName'].value)
+        // this.props.addNoteContent(event.target['noteContent'].value)
         const name = (event.target['noteName'].value)
         const content = (event.target['noteContent'].value)
         const folderId = this.state.selectedFolderId
@@ -29,12 +29,16 @@ export default class AddNote extends Component {
               },
               body: JSON.stringify({
                 name: name,
-                content: content,
                 modified: new Date().toISOString(),
-                folderId: folderId
-              })
-              
-        }).then(console.log(this.state.selectedFolderId, 'is the state'))
+                folderId: folderId,
+                content: content
+              }) 
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .then(response => this.props.addNewNote(response))
+        
+        
         
     }
 
@@ -53,10 +57,10 @@ export default class AddNote extends Component {
             <Link to='/'>Back</Link>
             <h3>Create a note</h3>
             <label htmlFor='noteName'>Name</label>
-            <input type='text' name='noteName' id='noteName'></input>
+                <input type='text' name='noteName' id='noteName' required></input>
             <br />
             <label htmlFor='contentName'>Content</label>
-            <input type='text' name='noteContent' id='noteContent' ></input>
+                <input type='text' name='noteContent' id='noteContent' ></input>
             <p>Folder</p>
             <select name='selectedFolder' onChange={this.selectFolder}>
                 {this.context.folders.map(folders => <option name='folderTarget' key={folders.id} value={folders.id} >{folders.name}</option>)}
