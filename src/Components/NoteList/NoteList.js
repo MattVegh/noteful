@@ -9,7 +9,6 @@ export default class NoteList extends Component {
     
     handleDeleteNote = (event, noteId) => {
         event.preventDefault();
-        console.log(noteId)
         fetch(`http://localhost:9090/notes${noteId}`, {
           method: 'DELETE',
           headers: {
@@ -19,6 +18,7 @@ export default class NoteList extends Component {
         })
         .then(response => response.json())
         .then(response => this.context.deleteNote(noteId))
+        
       }
     
     render() {

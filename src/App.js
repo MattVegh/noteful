@@ -45,7 +45,6 @@ class App extends Component {
   
 
   deleteNote = (deletedNote) => {
-    console.log(deletedNote, 'deleted')
     this.setState({
       notes: this.state.notes.filter(note => note.id !== deletedNote)
      });
@@ -69,8 +68,6 @@ class App extends Component {
       notes: this.state.notes,
       deleteNote: this.deleteNote
     }
-    
-    console.log(contextValue)
       return (
         <NoteContext.Provider value={contextValue} >
         <div className="App">
@@ -85,9 +82,9 @@ class App extends Component {
               <Route exact path='/' component={NoteList} />
               <Route exact path='/folder/:folderId' component={NoteList} />
               <Route path='/folder/:folderId/:noteId' component={Note} />
-              <Route path='/AddFolder' component={() => {return <AddFolder addNewFolder={this.addNewFolder}/>}} />
+      <Route path='/AddFolder' component={() => {return <AddFolder addNewFolder={this.addNewFolder} />}} />
               <AddNoteError>
-                <Route path='/AddNote' component={() => {return <AddNote addNewNote={this.addNewNote}/>}} />
+                <Route path='/AddNote' component={(props) => {return <AddNote {...props} addNewNote={this.addNewNote} />} }/>
               </AddNoteError>
               
             </main>

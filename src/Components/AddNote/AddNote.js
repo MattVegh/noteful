@@ -8,7 +8,8 @@ export default class AddNote extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedFolderId: ''
+            selectedFolderId: '',
+            shouldRedirect: false
         }
     }
     static contextType = NoteContext;
@@ -18,7 +19,6 @@ export default class AddNote extends Component {
         const name = (event.target['noteName'].value)
         const content = (event.target['noteContent'].value)
         const folderId = this.state.selectedFolderId
-        console.log('folderId is', folderId)
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
             headers: {
@@ -34,6 +34,7 @@ export default class AddNote extends Component {
         })
         .then(response => response.json())
         .then(response => this.props.addNewNote(response))
+        .then(this.props.history.push(`/`))
     }
 
     selectFolder = (event) => {
@@ -41,11 +42,10 @@ export default class AddNote extends Component {
         this.setState({
             selectedFolderId: value
         })
-        console.log(value)
-        
     }
     
     render() {
+        
     return (
         <form className='AddNote' onSubmit={event => this.handleSubmit(event)}>
             <Link to='/'>Back</Link>
@@ -57,10 +57,11 @@ export default class AddNote extends Component {
                 <input type='text' name='noteContent' id='noteContent' ></input>
             <p>Folder</p>
             <select name='selectedFolder' onChange={this.selectFolder}>
+                <option value=''>--Please Select A Folder --</option>
                 {this.context.folders.map(folders => <option name='folderTarget' key={folders.id} value={folders.id} >{folders.name}</option>)}
             </select>
            
-            <button>Add Note</button>
+            <button >Add Note</button>
         </form>
     )
     }

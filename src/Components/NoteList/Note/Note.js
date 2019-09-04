@@ -9,7 +9,6 @@ export default class Note extends Component {
     
     handleDeleteNote = (event, noteId) => {
         event.preventDefault();
-        console.log(noteId)
         fetch(`http://localhost:9090/notes${noteId}`, {
           method: 'DELETE',
           headers: {

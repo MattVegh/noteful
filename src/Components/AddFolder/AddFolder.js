@@ -28,7 +28,7 @@ export default class AddFolder extends Component {
             <Link to='/'>Back</Link>
             <h3>Create a folder</h3>
             <label htmlFor='folderName'>Folder Name</label>
-            <input type='text' name='folderName' id='folderName' ></input>
+            <input type='text' name='folderName' id='folderName' required></input>
             <button>Add Folder</button>
         </form>
     )
