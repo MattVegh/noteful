@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './NoteList.css'
 import { Link } from 'react-router-dom'
-import NoteContext from '../../NoteContext';
+import NoteContext from '../../NoteContext'
+import PropTypes from 'prop-types'
 
 
 export default class NoteList extends Component {
@@ -22,6 +23,10 @@ export default class NoteList extends Component {
       }
     
     render() {
+        NoteList.propTypes = {
+            folders: PropTypes.string,
+            notes: PropTypes.string
+        }
        
         
                 const notes = this.context.notes.filter(note => note.folderId === this.props.match.params.folderId);

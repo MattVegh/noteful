@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './Note.css'
 import { Link } from 'react-router-dom'
-import NoteContext from '../../../NoteContext';
+import NoteContext from '../../../NoteContext'
+import PropTypes from 'prop-types'
 
 
 export default class Note extends Component {
@@ -23,6 +24,10 @@ export default class Note extends Component {
 
 
     render() {
+      Note.propTypes = {
+        folders: PropTypes.string,
+        notes: PropTypes.string
+    }
         const noteArray = this.context.notes.filter(note => note.id === this.props.match.params.noteId);
         const note = noteArray[0]
         const folder = this.context.folders.filter(folder => folder.id === this.props.match.params.folderId)

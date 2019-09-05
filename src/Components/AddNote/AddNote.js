@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './AddNote.css'
 import { Link } from 'react-router-dom'
-import NoteContext from '../../NoteContext';
+import NoteContext from '../../NoteContext'
+import PropTypes from 'prop-types'
 
 
 export default class AddNote extends Component {
@@ -13,6 +14,7 @@ export default class AddNote extends Component {
         }
     }
     static contextType = NoteContext;
+    
     
     handleSubmit = (event) => {
         event.preventDefault();
@@ -45,6 +47,10 @@ export default class AddNote extends Component {
     }
     
     render() {
+        AddNote.propTypes = {
+            folders: PropTypes.string,
+            notes: PropTypes.string
+        }
         
     return (
         <form className='AddNote' onSubmit={event => this.handleSubmit(event)}>
@@ -56,7 +62,7 @@ export default class AddNote extends Component {
             <label htmlFor='contentName'>Content</label>
                 <input type='text' name='noteContent' id='noteContent' ></input>
             <p>Folder</p>
-            <select name='selectedFolder' onChange={this.selectFolder}>
+            <select name='selectedFolder' onChange={this.selectFolder} required>
                 <option value=''>--Please Select A Folder --</option>
                 {this.context.folders.map(folders => <option name='folderTarget' key={folders.id} value={folders.id} >{folders.name}</option>)}
             </select>

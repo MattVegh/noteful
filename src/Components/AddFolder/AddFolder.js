@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './AddFolder.css'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export default class AddFolder extends Component {
     
@@ -24,6 +25,9 @@ export default class AddFolder extends Component {
     }
     
     render() {
+        AddFolder.propTypes = {
+            folders: PropTypes.string
+        }
     return (
         <form className='AddFolder' onSubmit={this.handleSubmit}>
             <Link to='/'>Back</Link>
