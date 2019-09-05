@@ -20,6 +20,7 @@ export default class AddFolder extends Component {
         })
         .then(response => response.json())
         .then(response => this.props.addNewFolder(response))
+        .then(this.props.history.push(`/`))
     }
     
     render() {
